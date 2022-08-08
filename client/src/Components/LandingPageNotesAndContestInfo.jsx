@@ -5,11 +5,14 @@ import contestData from "../LottieFIles/LottieContest.json";
 const LandingPageNotesAndContestInfo = () => {
   return (
     <>
-      <div className="flex flex-col justify-start items-center xl:w-[75rem] lg:w-[65rem] my-20 ">
-        <h1 className="text-4xl text-white">
+      <div
+        id="landingPage"
+        className="flex flex-col justify-start items-center xl:w-[75rem] lg:w-[65rem] my-8 py-8 "
+      >
+        <h1 className="text-4xl text-white mt-16 pt-8">
           Why Use <span className="text-green-500 text-5xl">CodeX</span>{" "}
         </h1>
-        <div className="flex justify-between items-center text-white text-3xl w-full h-[24rem]">
+        <div className="flex justify-between items-center text-white text-3xl w-[70rem] h-[24rem]">
           <div className="w-[30rem] mx-5 ">
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
