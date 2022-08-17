@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import NewQuestionProvider from "./Provider/NewQuestionProvider";
 import { ChakraProvider } from "@chakra-ui/react";
+import AuthProvider from "./Provider/AuthProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -12,8 +13,10 @@ root.render(
     <NewQuestionProvider>
       {" "}
       <ChakraProvider>
-        {" "}
-        <App />
+        <AuthProvider>
+          {" "}
+          <App />
+        </AuthProvider>{" "}
       </ChakraProvider>
     </NewQuestionProvider>
   </Router>

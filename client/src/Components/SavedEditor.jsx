@@ -2,10 +2,15 @@ import CodeEditor from "@uiw/react-textarea-code-editor";
 import { useState } from "react";
 import { TiDelete } from "react-icons/ti";
 import useNewQuestion from "../Hooks/useNewQuestion";
+import { useContext } from "react";
+import { FirestoreContext } from "../Provider/FirestoreProvider";
 
 import "@wcj/dark-mode";
+const SavedEditor = () => {
+  const { showStoreQuestion, edit, setEdit, editCode, setEditCode } =
+    useContext(FirestoreContext);
+  // const [editCode, setEditCode] = useState(showStoreQuestion?.code);
 
-const Editor = () => {
   const { newProblem } = useNewQuestion();
   // const [code, setCode] = useState("");
   const [dark, setDark] = useState(false);
@@ -46,7 +51,7 @@ const Editor = () => {
     <>
       <div>
         <div className="flex justify-between items-center px-3 h-12">
-          <div>
+          {/* <div>
             {" "}
             <input
               className="bg-black outline-none text-white focus:border-green-600 focus:border py-2 px-3 rounded-md "
@@ -54,9 +59,9 @@ const Editor = () => {
               placeholder="Add a Tag"
               onKeyDown={handleKeyDown}
             />
-          </div>
+          </div> */}
           <div className="flex justify-start items-center text-white">
-            {newProblem.tags.map((tag, index) => (
+            {showStoreQuestion?.tags.map((tag, index) => (
               <div
                 className="flex justify-start items-center mx-1 py-2 px-3 rounded-md border border-green-700 text-xl font-light text-green-500"
                 key={index}
@@ -82,24 +87,42 @@ const Editor = () => {
               light="Light"
             ></dark-mode>
           </div>
-          <CodeEditor
-            value={newProblem.code}
-            language="cpp"
-            placeholder="Please enter your Notes."
-            onChange={(evn) => newProblem.setCode(evn.target.value)}
-            padding={15}
-            style={{
-              fontSize: 20,
-              backgroundColor: { color },
-              fontFamily:
-                "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-            }}
-            className="w-[72rem] h-[25rem] rounded-xl border-green-500 border-2 mb-3"
-          />{" "}
+          {edit ? (
+            <CodeEditor
+              value={editCode}
+              language="cpp"
+              placeholder="Please enter your Notes."
+              onChange={(evn) => setEditCode(evn.target.value)}
+              padding={15}
+              style={{
+                fontSize: 20,
+                backgroundColor: { color },
+                fontFamily:
+                  "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+              }}
+              className="w-[72rem] h-[25rem] rounded-xl border-green-500 border-2 mb-3"
+            />
+          ) : (
+            <CodeEditor
+              value={showStoreQuestion?.code}
+              language="cpp"
+              placeholder="Please enter your Notes."
+              onChange={(evn) => showStoreQuestion.setCode(evn.target.value)}
+              padding={15}
+              disabled
+              style={{
+                fontSize: 20,
+                backgroundColor: { color },
+                fontFamily:
+                  "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+              }}
+              className="w-[72rem] h-[25rem] rounded-xl border-green-500 border-2 mb-3"
+            />
+          )}
         </div>
       </div>
     </>
   );
 };
 
-export default Editor;
+export default SavedEditor;
